@@ -1,0 +1,8 @@
+---
+
+- name: lxc > client > Install tools
+  include_tasks: install.yml
+
+- name: lxc > client > Configure tools
+  include_tasks: config.yml
+  when: lxc_remote_list | default([]) | list | length

@@ -1,0 +1,22 @@
+---
+
+- name: lxc > client > config > Pre-requisites
+  assert:
+    that:
+      - lxc_remote['name'] is defined and lxc_remote['name'] is not none
+      - lxc_remote['host'] is defined and lxc_remote['host'] is not none
+      - lxc_remote['password'] is defined and lxc_remote['password'] is not none
+  no_log: true
+  with_items: "{{ lxc_remote_list }}"
+  loop_control:
+    loop_var: lxc_remote
+
+- name: lxc > client > config > remote
+  shell: |
+    lxc remote list --format csv | grep "^{{ lxc_remote.name }}" || \
+    yes | lxc remote add {{ lxc_remote.name }} {{ lxc_remote.host }} --password {{ lxc_remote.password }}
+  no_log: true
+  register: lxc_remote_list_cmd
+  with_items: "{{ lxc_remote_list }}"
+  loop_control:
+    loop_var: lxc_remote

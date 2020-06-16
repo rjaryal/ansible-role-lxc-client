@@ -1,0 +1,12 @@
+---
+
+#
+# REFERENCE: https://linuxcontainers.org/lxd/getting-started-cli/#multiple-hosts
+#
+#   lxc_remote_list:                        OPTIONAL, default = []
+#     - name: <name_for_remote_lxc_host>    REQUIRED
+#       host: <remote_host>                 REQUIRED
+#       password: <password_for_auth>       REQUIRED
+#
+
+lxc_remote_list: []
